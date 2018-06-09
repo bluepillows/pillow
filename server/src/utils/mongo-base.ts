@@ -14,10 +14,10 @@ const COUNTER_COLLECTION = 'counter'
 
 export class MongoBase {
   
-  private _id      : any
-  private createTs : number
-  private deleted  : boolean = false
-  private modTs    : number
+  protected _id      : any
+  protected createTs : number
+  protected deleted  : boolean = false
+  protected modTs    : number
 
   protected static _collectionName : string
 

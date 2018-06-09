@@ -42,7 +42,7 @@ export class PillowServer {
     io.on('connection', this.handleClient)
 
     console.log(`Listening to port : ${PORT}`)
-    app.listen(PORT)
+    server.listen(PORT)
   }
 
   handleClient(socket : socketio.Socket) {
@@ -64,7 +64,8 @@ export class PillowServer {
     //   io.sockets.emit('newMessage', data)
     // })
 
-    socket.on('message', (message) => {
+    socket.on('event1', (message) => {
+      console.log('message :', message)
       io.emit('message', message)
     })
 
