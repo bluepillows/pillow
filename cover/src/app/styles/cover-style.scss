@@ -1,0 +1,63 @@
+/**
+*   Contains global styles applicable to all components in the app.
+**/
+@import 'cover-theme';
+@import 'cover-variable';
+
+//================================== FONT IMPORTS ==============================
+
+// @font-face {
+//   font-family: $font-body-bold;
+//   src: url('../fonts/opensans/OpenSans-Bold.woff2');
+// }
+
+// @font-face {
+//   font-family: $font-body-normal;
+//   src: url('../fonts/opensans/OpenSans-SemiBold.woff2');
+// }
+
+// @font-face {
+//   font-family: $font-body-light;
+//   src: url('../fonts/opensans/OpenSans-Regular.woff2');
+// }
+
+//================================= GLOBAL STYLING =============================
+
+html {
+  box-sizing: border-box;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: inherit;
+}
+
+*:before, *:after {
+  box-sizing: inherit;
+}
+
+* {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+* {
+  -webkit-tap-highlight-color: rgba(0,0,0, 0.0);
+  outline: none;
+}
+
+html, body {
+  max-width: 100vw !important;
+  min-width: 100vw !important;
+
+  max-height: 100vh !important;
+  min-height: 100vh !important;
+  
+  overflow: hidden !important;
+  font-size: $reference-font-size;
+}

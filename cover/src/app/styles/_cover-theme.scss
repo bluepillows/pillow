@@ -1,0 +1,274 @@
+// MATERIAL IMPORTS
+@import '../../../node_modules/@angular/material/theming';
+@include mat-core();
+@import 'common-theme';
+
+
+
+//============================ MODULE LEVEL IMPORTS ============================
+
+
+@mixin co-material-theme($theme) {
+
+}
+
+
+
+//================================ COLOR PALETTE ===============================
+
+// PRIMARY COLOR USED IN NON-PROD ENVS
+$primary: (
+  50: #FFF3E0,
+  100: #FFE0B2, // primary lightest
+  200: #FFCC80,
+  300: #FFB74D, // use this hue as 'lighter' instead of '100'
+  400: #FFA726,
+  500: #FF9800, // the primary color, 500 is the main shade
+  600: #FB8C00,
+  700: #F57C00, // primary darker
+  800: #EF6C00,
+  900: #E65100, // body bg for dark theme
+  A100: #FFD180,
+  A200: #FFAB40,
+  A400: #FF9100,
+  A700: #FF6D00,
+  contrast: (
+    50: $black-87-opacity,
+    100: $black-87-opacity,
+    200: $black-87-opacity,
+    300: white,
+    400: white,
+    500: $white-87-opacity,
+    600: $white-87-opacity,
+    700: $white-87-opacity,
+    800: $white-87-opacity,
+    900: $white-87-opacity,
+    A100: $black-87-opacity,
+    A200: white,
+    A400: white,
+    A700: $white-87-opacity,
+  ),
+);
+
+$co-text-light: (
+  100: #FFFFFF,
+  200: #f2f5f7,
+  300: #e6ecf0,
+  400: #c8cacf,
+  500: #9ea2aa,
+  600: #898d98,
+  700: #6b707b,
+  800: #3e4047,
+  900: #000,
+  contrast: (
+    500: $white-87-opacity,
+    600: $white-87-opacity,
+  ),
+);
+
+$co-text-dark: (
+  100: #FFFFFF,
+  200: #f2f5f7,
+  300: #e6ecf0,
+  400: #c8cacf,
+  500: #9ea2aa,
+  600: #898d98,
+  700: #6b707b,
+  800: #3e4047,
+  900: #fff,
+  contrast: (
+    500: $white-87-opacity,
+    600: $white-87-opacity,
+  ),
+);
+
+$co-bg-light: (
+  400: #FFFFFF,
+  500: #f2f5f7,
+  600: #e6ecf0,
+  700: #c8cacf,
+  800: #9ea2aa,
+  900: #c8cacf,
+  contrast: (
+    500: $white-87-opacity,
+    600: $white-87-opacity,
+  ),
+);
+
+$co-bg-dark: (
+  100: #FFFFFF,
+  200: #e6ecf0,
+  300: #c8cacf,
+  400: #9ea2aa,
+  500: #898d98,
+  600: #6b707b,
+  //700: #37353A,
+  700: map-get($primary, 900),
+  //800: map-get($primary, 900),
+  800: #191a1d,
+  900: #191a1d,
+  contrast: (
+    500: $white-87-opacity,
+    600: $white-87-opacity,
+  ),  
+);
+
+
+
+//================================= BACKGROUND =================================
+
+// Background palette for light theme
+$light-background: (
+  status-bar:               map_get($mat-grey, 300),
+  app-bar:                  map_get($mat-grey, 100),
+  background:               map-get($co-bg-light, 400),
+  hover:                    rgba(black, 0.04),
+  card:                     white,
+  dialog:                   white,
+  disabled-button:          $black-12-opacity,
+  raised-button:            white,
+  focused-button:           $black-6-opacity,
+  selected-button:          map_get($mat-grey, 300),
+  selected-disabled-button: map_get($mat-grey, 400),
+  disabled-button-toggle:   map_get($mat-grey, 200),
+  unselected-chip:          map_get($mat-grey, 300),
+  disabled-list-option:     map_get($mat-grey, 200),
+
+  grey-button:              map-get($co-bg-light, 700),
+  grey-button-active:       map-get($co-bg-light, 600),
+
+  co-bg-first:              map-get($co-bg-light, 400),
+  co-bg-second:             map-get($co-bg-light, 500),
+  co-bg-third:              map-get($co-bg-light, 600),
+  co-bg-fourth:             map-get($co-bg-light, 700),
+  co-bg-fifth:              map-get($co-bg-light, 800),
+);
+
+// Background palette for dark theme
+$dark-background: (
+  status-bar:               black,
+  app-bar:                  map_get($mat-grey, 900),
+  background:               map-get($co-bg-dark, 800),
+  hover:                    rgba(white, 0.04),
+  card:                     map_get($mat-grey, 800),
+  dialog:                   map_get($mat-grey, 800),
+  disabled-button:          $white-12-opacity,
+  raised-button:            map-get($mat-grey, 800),
+  focused-button:           $white-6-opacity,
+  selected-button:          map_get($mat-grey, 900),
+  selected-disabled-button: map_get($mat-grey, 800),
+  disabled-button-toggle:   black,
+  unselected-chip:          map_get($mat-grey, 700),
+  disabled-list-option:     black,
+  grey-button:              map-get($co-bg-dark, 500),
+  grey-button-active:       map-get($co-bg-dark, 300),
+  
+  co-bg-first:              map-get($co-bg-dark, 800),
+  co-bg-second:             map-get($co-bg-dark, 700),
+  co-bg-third:              map-get($co-bg-dark, 600),
+  co-bg-fourth:             map-get($co-bg-dark, 500),
+  co-bg-fifth:              map-get($co-bg-dark, 600),
+);
+
+
+
+//================================= FOREGROUND =================================
+
+// Foreground palette for light theme
+$light-foreground: (
+  base:               black,
+  divider:            map-get($co-text-light, 300),
+  dividers:           map-get($co-text-light, 300),
+  disabled:           rgba(black, 0.38),
+  disabled-button:    rgba(black, 0.38),
+  disabled-text:      rgba(black, 0.38),
+  hint-text:          rgba(black, 0.38),
+  secondary-text:     rgba(black, 0.54),
+  icon:               map-get($co-text-light, 600),
+  icons:              map-get($co-text-light, 600),
+  text:               map-get($co-text-light, 600),
+  slider-min:         rgba(black, 0.87),
+  slider-off:         rgba(black, 0.26),
+  slider-off-active:  rgba(black, 0.38),
+
+  co-text-first:      map-get($co-text-light, 500),
+  co-text-second:     map-get($co-text-light, 600),
+  co-text-fourth:     map-get($co-text-light, 700),
+  co-text-fifth:      map-get($co-text-light, 800),
+  co-text-sixth:      map-get($co-text-light, 200),
+);
+
+// Foreground palette for dark theme
+$dark-foreground: (
+  base:               white,
+  divider:            map-get($co-text-dark, 800),
+  dividers:           map-get($co-text-dark, 800),
+  disabled:           rgba(white, 0.3),
+  disabled-button:    rgba(white, 0.3),
+  disabled-text:      rgba(white, 0.3),
+  hint-text:          rgba(white, 0.3),
+  secondary-text:     rgba(white, 0.7),
+  icon:               map-get($co-text-dark, 500),
+  icons:              map-get($co-text-dark, 500),
+  text:               map-get($co-text-dark, 500),
+  slider-min:         white,
+  slider-off:         rgba(white, 0.3),
+  slider-off-active:  rgba(white, 0.3),
+  
+  co-text-first:      map-get($co-text-dark, 600),
+  co-text-second:     map-get($co-text-dark, 500),
+  co-text-fourth:     map-get($co-text-dark, 300),
+  co-text-fifth:      map-get($co-text-dark, 200),
+  co-text-sixth:      map-get($co-text-dark, 100),
+);
+
+
+
+//=============================== LIGHT THEME ==================================
+
+@function co-mat-light-theme($primary, $accent, $warn) {
+  @return (
+    primary: $primary,
+    accent: $accent,
+    warn: $warn,
+    is-dark: false,
+    foreground: $light-foreground,
+    background: $light-background,
+  );
+}
+
+$co-light-primary : mat-palette($primary);
+$co-light-accent  : mat-palette($primary);
+$co-light-warn    : mat-palette($mat-red);
+
+$co-light-theme   : co-mat-light-theme($co-light-primary, $co-light-accent, $co-light-warn);
+
+@include angular-material-theme($co-light-theme);
+@include co-material-theme($co-light-theme);
+
+
+
+//================================ DARK THEME ==================================
+
+.dark-theme {
+  @function co-mat-dark-theme($primary, $accent, $warn) {
+    @return (
+      primary: $primary,
+      accent: $accent,
+      warn: $warn,
+      is-dark: true,
+      foreground: $dark-foreground,
+      background: $dark-background,
+    );
+  }
+
+  $co-dark-primary  : mat-palette($primary);
+  $co-dark-accent   : mat-palette($primary);
+  $co-dark-warn     : mat-palette($mat-red);
+
+  $co-dark-theme    : co-mat-dark-theme($co-dark-primary, $co-dark-accent, $co-dark-warn);
+
+  @include angular-material-theme($co-dark-theme);
+  @include co-material-theme($co-dark-theme);
+}
+

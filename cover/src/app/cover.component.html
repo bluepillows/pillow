@@ -1,0 +1,12 @@
+<div class="app-root root-comp"
+  [class.dark-theme]="nightMode">
+  
+  <ng-container [ngSwitch]="componentType">
+    
+    <cover-friends *ngSwitchCase="COMPONENT_TYPE.FRIENDS"></cover-friends>
+    
+    <cover-chat *ngSwitchCase="COMPONENT_TYPE.CHAT"></cover-chat>
+
+  </ng-container>
+
+</div>

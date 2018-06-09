@@ -1,0 +1,43 @@
+
+// common theme
+// this file can never be included in any file except co-theme
+
+@mixin common-theme-color($theme) {
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+  $warn: map-get($theme, warn);
+  $foreground: map-get($theme, foreground);
+  $background: map-get($theme, background);
+
+  //---------------------------------- DIVS ------------------------------------
+
+  .co-root-div {
+    background: mat-color($background, background);
+  }
+
+  .co-toolbar {
+    background: mat-color($background, co-bg-second);
+    border-bottom: 1px solid mat-color($foreground, divider);
+  }
+
+  .toolbar-title {
+    color: mat-color($foreground, text);
+  }
+
+
+  //-------------------------------- BUTTONS -----------------------------------
+
+  .button-primary {
+    background: mat-color($primary, 500);
+    color: mat-color(map-get($primary, contrast), 500);
+    border: 1px solid mat-color($primary, 500);
+  }
+
+
+  //--------------------------------- ICONS ------------------------------------
+
+  .ic-primary {
+    color: mat-color($primary, 500);
+  }
+
+}
