@@ -40,10 +40,8 @@ export class PillowIo {
       socket.on(event, async message => {
         console.log(`[${socket.id}] Event : ${event}, Message : ${JSON.stringify(message)}`)
       
-        const invStruct = PillowIo.eventMap[event],
-              retVal    = await invStruct.executeFn(this.rc, message)
-
-        PillowIo.io.emit(event, retVal)
+        const invStruct = PillowIo.eventMap[event]
+        await invStruct.executeFn(this.rc, PillowIo.io, socket, message)
       })
     }
 

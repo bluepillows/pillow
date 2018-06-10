@@ -6,14 +6,37 @@
    
 ------------------------------------------------------------------------------*/
 
-export namespace PillowMessage {
-  export const name = 'pillowMessage'
+import {MessageInfo} from './pillow-types'
+
+export namespace SendMessage {
+  export const name = 'sendMessage'
 
   export type params = {
-    name    : string
-    message : string
+    message : MessageInfo
   }
   export type retval = {
-    
+    name    : string
+    message : string
+    sentTs  : number
+  }
+}
+
+export namespace JoinRoom {
+  export const name = 'joinRoom'
+
+  export type params = {
+    room : string
+  }
+  export type retval = {
+  }
+}
+
+export namespace ListRooms {
+  export const name = 'listRooms'
+
+  export type params = {
+  }
+  export type retval = {
+    rooms : string[]
   }
 }
