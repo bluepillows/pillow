@@ -10,7 +10,6 @@ import * as express                               from 'express'
 import * as socketio                              from 'socket.io'
 import { Server }                                 from 'http'
 import { RunContext }                             from './runcontext'
-import * as Events                                from '../Events'
 
 export class PillowIo {
   
@@ -37,22 +36,16 @@ export class PillowIo {
   static handleClient(socket : socketio.Socket) {
     console.log(`User Conected : ${socket.id}`)
 
-    for(let event in this.eventMap) {
+    for(let event in PillowIo.eventMap) {
       socket.on(event, async message => {
         console.log(`[${socket.id}] Event : ${event}, Message : ${JSON.stringify(message)}`)
       
-        const invStruct = this.eventMap[event],
+        const invStruct = PillowIo.eventMap[event],
               retVal    = await invStruct.executeFn(this.rc, message)
 
         socket.emit(event, retVal)
       })
     }
-
-    socket.on('pillowMessage', message => {
-      console.log(`Message : ${JSON.stringify(message)}`)
-
-      socket.emit('pillowMessage', message)
-    })
 
     PillowIo.handleDisconnect(socket)
   }
@@ -64,17 +57,17 @@ export class PillowIo {
     })
   }
 
-  // static commitRegister(rc: RunContext, providers: any[]) {
+  static commitRegister(rc: RunContext, providers: any[]) {
 
-  //   providers.forEach(provider => {
+    // providers.forEach(provider => {
 
-  //     let providerUsed = false
-  //      while (provider !== Function && provider !== Object) {
-  //       if (this.checkForProvider(rc, provider)) providerUsed = true
-  //       provider = provider.constructor
-  //     }
-  //   })
-  // }
+    //   let providerUsed = false
+    //    while (provider !== Function && provider !== Object) {
+    //     if (this.checkForProvider(rc, provider)) providerUsed = true
+    //     provider = provider.constructor
+    //   }
+    // })
+  }
 
   // private static checkForProvider(rc: RunContext, provider: any): boolean {
 
@@ -85,7 +78,7 @@ export class PillowIo {
   //     if (!this.eventMap.hasOwnProperty(key)) continue
 
   //     const eInfo = this.eventMap[key],
-  //           fnName = eInfo.name
+  //           fnName = eInfo.eventName
   //     let match = false
 
   //     if (eInfo.parent.prototype) { // api is static function of a class
@@ -99,7 +92,7 @@ export class PillowIo {
   //     }
 
   //     if (match) {
-  //       this.enrollEvent(fnName)
+  //       // this.enrollEvent(fnName, eInfo.parent)
   //       providerUsed = true
   //     }
   //   }
@@ -107,33 +100,34 @@ export class PillowIo {
     
   // }
 
-  static enrollEvent(eventName : string) {
+  static enrollEvent(eventName : string, parent : any) {
     if(this.eventMap[eventName]) {
-      const msg = `Duplicate definition for event found: ${name}`
+      const msg = `Duplicate definition for event found: ${eventName}`
       console.error(msg)
       throw(Error(msg))
     }
 
-    this.eventMap[eventName] = new InvokeStruct(name, parent)
+    this.eventMap[eventName] = new InvokeStruct(eventName, parent)
     console.log('Enrolled event :', eventName)
   }
 }
 
 export function PillowEvent(eventName : string) {
+  
   return function (target: any, propertyKey: string, descriptor: PropertyDescriptor) {
-    PillowIo.enrollEvent(eventName)
+    PillowIo.enrollEvent(eventName, target)
   }
 }
 
 export class InvokeStruct {
 
-  constructor(public name : string, public parent : any) {}
+  constructor(public eventName : string, public parent : any) {}
 
   async executeFn(...params: any[]) {
-    let fn = this.parent[this.name]
+    let fn = this.parent[this.eventName]
     if (fn) return await fn.call(this.parent, ...params)
 
     const obj = new this.parent()
-    return await obj[this.name].call(obj, ...params)
+    return await obj[this.eventName].call(obj, ...params)
   }
 }
