@@ -2,6 +2,7 @@ import { Injectable,
          Inject }                                 from '@angular/core'
 import { RunContext }                             from 'src/app/framework'
 import { Observable }                             from 'rxjs'
+import { Friend }                                 from '../../shared'
 import * as io                                    from 'socket.io-client'
 
 @Injectable({
@@ -12,7 +13,7 @@ export class FriendsService {
   private url = 'http://192.168.0.105:9001'
   private socket
 
-  friendsList: any[]
+  friendsList: Friend[]
 
   constructor(@Inject('RunContext') private rc: RunContext) {
 

@@ -9,16 +9,15 @@ import * as io                                    from 'socket.io-client'
 })
 export class ChatService {
 
-  private url = 'http://192.168.0.105:9001'
-  private socket
-
   constructor(@Inject('RunContext') private rc: RunContext) {
 
   }
 
-  sendMessage(message){
-    console.log(`wasp > chat.service > sendMessage: ${message}`)
-    this.socket.emit('message', message)
+  sendMessage(message) {
+    
+    this.rc.xmn.sendEvent('event-name', {
+      msg: message
+    })
   }
   
   getMessages() {
