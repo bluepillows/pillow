@@ -10,13 +10,16 @@ import {
          RunContext,
          PillowIo
        }                                          from './framework'
+import * as Events                                from './Events'
 
 export class PillowServer {
 
   rc : RunContext
 
-  main() {
+  async main() {
     this.rc = new RunContext()
+
+    await PillowIo.commitRegister(this.rc, Events.getApiProviders())
 
     PillowIo.init(this.rc)
   }
