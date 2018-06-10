@@ -1,3 +1,15 @@
-<p>
-  friends works!
-</p>
+<div class="cover-root friends-comp">
+
+  <div class="friends-content">
+
+    <div class="name-input">
+      <input type="text"
+        placeholder="My name..."
+        [(ngModel)]="myName"
+        (keyup.enter)="saveName()"
+        name="myName">
+    </div>
+
+  </div>
+
+</div>

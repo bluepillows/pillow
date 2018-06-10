@@ -1,31 +1,39 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { RunContext } from '../../framework';
 import { ChatService } from '../../services/chat.service';
+import { MessageInfo } from '../../../shared';
 
 @Component({
-  selector: 'cover-chat',
-  templateUrl: './chat.component.html',
-  styleUrls: ['./chat.component.scss']
+  selector    : 'cover-chat',
+  templateUrl : './chat.component.html',
+  styleUrls   : ['./chat.component.scss']
 })
 export class ChatComponent implements OnInit {
 
-  message: string
+  header       : string
+  chatMessages : MessageInfo[] = []
+  newMessage   : string
 
   constructor(@Inject('RunContext') private rc : RunContext,
               private chatService              : ChatService) {
+    
 
   }
 
   ngOnInit() {
-    this.chatService.getMessages().subscribe(message => {
-      console.log(`wasp > chat > ngOnInit > message : ${message}`)
-    })
+    
+    this.initUi()
+  }
+
+  initUi() {
+    this.header = 'Chatroom'
   }
 
   sendMessage() {
-    const message = this.message
+    
+    const message = this.newMessage
     this.chatService.sendMessage(message)
-    this.message = null
+    this.newMessage = null
   }
 
 }

@@ -1,0 +1,19 @@
+.new-msg-input {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 10vh;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 0 2vw;
+  border: 1px solid #efefef;
+  border-radius: 40px;
+
+  input {
+    width: 90vw;
+    height: 100%;
+    font-size: 1.2rem;
+  }
+}

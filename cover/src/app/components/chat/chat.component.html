@@ -1,7 +1,33 @@
-<div>
-  <input type="text" placeholder="Type here..." [(ngModel)]="message" name="message">
+<div class="cover-root chat-comp">
+
+  <mat-toolbar class="chat-header">
+    {{ header }}
+  </mat-toolbar>
+
+  <div class="messages-container">
+
+    <ul>
+      <li class="message-item" *ngFor="let msg of chatMessages">
+        {{ msg.senderName }}
+        {{ msg.text }}
+      </li>
+    </ul>
+
+  </div>
+
 </div>
 
-<button (click)="sendMessage()">
-  send message
-</button>
+<div class="new-msg-input">
+  <input type="text"
+    placeholder="Type here..."
+    name="newMessage"
+    [(ngModel)]="newMessage"
+    (keyup.enter)="sendMessage()">
+
+  <button mat-mini-fab 
+    type="button"
+    color="primary"
+    (click)="sendMessage()">
+    <i class="material-icons">send</i>
+  </button>
+</div>

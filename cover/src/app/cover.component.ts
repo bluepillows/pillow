@@ -7,7 +7,7 @@ import { RunContext }                             from './framework'
 import { FriendsService }                         from 'src/app/services/friends.service'
 import { MessageInfo }                            from 'src/shared/pillow-types'
 
-enum COMPONENT_TYPE {
+export enum COMPONENT_TYPE {
   FRIENDS = 'friends',
   CHAT    = 'chat'
 }
@@ -24,7 +24,7 @@ export class CoverComponent implements OnInit {
   apiState       : API_STATE
 
   COMPONENT_TYPE : typeof COMPONENT_TYPE = COMPONENT_TYPE
-  componentType  : COMPONENT_TYPE        = COMPONENT_TYPE.CHAT
+  componentType  : COMPONENT_TYPE        = COMPONENT_TYPE.FRIENDS
 
   nightMode      : boolean               = false // WASP : store this in localstorage
 
@@ -39,8 +39,12 @@ export class CoverComponent implements OnInit {
 
   ngOnInit() {
 
-    this.rc.xmn.sendEvent('event1', {
+    this.rc.coRouter.registerCover(this)
+
+    this.rc.xmn.sendEvent('pillowMessage', {
       msg: 'Client to server, can you hear me server?'
     })
   }
+
+
 }

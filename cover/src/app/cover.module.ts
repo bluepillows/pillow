@@ -1,10 +1,20 @@
+// ANGULAR MODULES
 import { BrowserModule }                          from '@angular/platform-browser'
 import { NgModule }                               from '@angular/core'
-import { FormsModule }                                  from '@angular/forms'
+import { FormsModule }                            from '@angular/forms'
+import { MatToolbarModule,
+         MatButtonModule }                        from '@angular/material'
 
-import { CoverComponent }                         from './cover.component';
-import { FriendsComponent } from './components/friends/friends.component';
+// COMPONENTS
+import { CoverComponent }                         from './cover.component'
+import { FriendsComponent } from './components/friends/friends.component'
 import { ChatComponent } from './components/chat/chat.component'
+
+// SERVICES
+
+
+//DIRECTIVES
+
 
 @NgModule({
   declarations: [
@@ -15,6 +25,8 @@ import { ChatComponent } from './components/chat/chat.component'
   imports: [
     BrowserModule,
     FormsModule,
+    MatToolbarModule,
+    MatButtonModule
   ],
   providers: [],
   bootstrap: [CoverComponent]

@@ -12,6 +12,8 @@ export class XmnCover {
   constructor(url: string) {
 
     this.setupConnection(url)
+
+    this.eventHandler()
   }
 
   setupConnection(url) {
@@ -21,9 +23,19 @@ export class XmnCover {
     }
   }
 
-  sendEvent(eventName: events, data: any) {
-    
+  sendEvent(eventName: string, data: any) {
+
+    console.log(`wasp > sendEvent > eventname: ${eventName}, data: ${JSON.stringify(data)}`)
+
     this.socket.emit(eventName, data)
+  }
+
+  private eventHandler() {
+    console.log(`wasp > eventHandler`)
+
+    this.socket.on('pillowMessage', data => {
+      console.log(`wasp > eventHandler > data: ${data}`)
+    })
   }
 
 }
