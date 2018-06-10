@@ -8,6 +8,7 @@
 
 import {Db}                                       from 'mongodb'
 import {ENV}                                      from './env'
+import * as path from 'path'
 
 export class RunContext {
 
@@ -15,6 +16,7 @@ export class RunContext {
   ENV   : ENV
 
   constructor() {
+    this.ENV = require(path.resolve('./config/env.json'))
 
   }
   

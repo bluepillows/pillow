@@ -1,11 +1,14 @@
 /*------------------------------------------------------------------------------
    About      : <Write about the file here>
    
-   Created on : Sat Jun 09 2018
+   Created on : Sun Jun 10 2018
    Author     : Akash Dathan
-
+   
 ------------------------------------------------------------------------------*/
 
-export *                                          from './runcontext'
-export *                                          from './pillow-io'
-export *                                          from './env'
+import {MessageEvents} from './message-events'
+
+export function getApiProviders() {
+  return [MessageEvents]
+}
+
