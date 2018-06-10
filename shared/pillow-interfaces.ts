@@ -8,8 +8,8 @@
 
 import {MessageInfo} from './pillow-types'
 
-export namespace SendMessage {
-  export const name = 'sendMessage'
+export namespace MessageIO {
+  export const name = 'messageIO'
 
   export type params = {
     message : MessageInfo

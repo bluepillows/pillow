@@ -15,16 +15,16 @@ import {
           Socket
        }                                          from 'socket.io'
 import {
-          SendMessage,
+          MessageIO,
           ListRooms,
           JoinRoom
        }                                          from '../shared'
 
 export class MessageEvents {
 
-  @PillowEvent(SendMessage.name)
-  async sendMessage(rc : RunContext, io : Server, socket : Socket, param : SendMessage.params) {
-    const retval = {} as SendMessage.retval,
+  @PillowEvent(MessageIO.name)
+  async messageIO(rc : RunContext, io : Server, socket : Socket, param : MessageIO.params) {
+    const retval = {} as MessageIO.retval,
           room   = param.message.room || 'commom_room'
 
     
@@ -37,7 +37,7 @@ export class MessageEvents {
       socket.join(room)
     }
 
-    io.to(room).emit(SendMessage.name, retval)
+    io.to(room).emit(MessageIO.name, retval)
   }
 
   @PillowEvent(ListRooms.name)
