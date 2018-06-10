@@ -43,7 +43,7 @@ export class PillowIo {
         const invStruct = PillowIo.eventMap[event],
               retVal    = await invStruct.executeFn(this.rc, message)
 
-        socket.broadcast.emit(event, retVal)
+        PillowIo.io.emit(event, retVal)
       })
     }
 
