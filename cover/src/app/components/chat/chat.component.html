@@ -1,4 +1,5 @@
-<div class="cover-root chat-comp">
+<div class="cover-root chat-comp co-event-new-message"
+  (co-event-new-message)="messageReceived($event)">
 
   <mat-toolbar class="chat-header">
     {{ header }}
@@ -8,8 +9,8 @@
 
     <ul>
       <li class="message-item" *ngFor="let msg of chatMessages">
-        {{ msg.senderName }}
-        {{ msg.text }}
+        {{ msg?.senderName }}
+        {{ msg?.text }}
       </li>
     </ul>
 

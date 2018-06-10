@@ -1,4 +1,4 @@
-import { XmnCover }                               from './xmn-cover'
+import { XmnCover }                               from 'src/app/framework/xmn-cover'
 import { CoRouter }                               from 'src/app/framework/co-router'
 
 export class RunContext {

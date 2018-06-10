@@ -1,7 +1,9 @@
-import { Component, OnInit, Inject } from '@angular/core';
-import { RunContext } from '../../framework';
-import { ChatService } from '../../services/chat.service';
-import { MessageInfo } from '../../../shared';
+import { Component,
+         OnInit,
+         Inject }                                 from '@angular/core'
+import { RunContext }                             from 'src/app/framework/rc-cover'
+import { ChatService }                            from 'src/app/services/chat.service'
+import { MessageInfo }                            from 'src/shared'
 
 @Component({
   selector    : 'cover-chat',
@@ -16,12 +18,11 @@ export class ChatComponent implements OnInit {
 
   constructor(@Inject('RunContext') private rc : RunContext,
               private chatService              : ChatService) {
-    
 
   }
 
   ngOnInit() {
-    
+
     this.initUi()
   }
 
@@ -30,10 +31,20 @@ export class ChatComponent implements OnInit {
   }
 
   sendMessage() {
-    
-    const message = this.newMessage
-    this.chatService.sendMessage(message)
+
+    const text = this.newMessage
+    this.chatService.sendMessage(text)
     this.newMessage = null
+  }
+
+  messageReceived(event: any) {
+
+    console.log(`wasp > messageReceived > event: ${JSON.stringify(event.detail)}`)
+
+    const message: MessageInfo = event.detail.message
+    this.chatMessages.push(message)
+
+    console.log(`wasp > messageReceived > chatMessages: ${JSON.stringify(this.chatMessages)}`)
   }
 
 }

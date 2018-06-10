@@ -1,5 +1,5 @@
-export class Friend {
-  fid  : number
+export class UserInfo {
+  uid  : number
   name : string
 }
 
@@ -11,5 +11,4 @@ export class MessageInfo {
   receiverId   : number
   receiverName : string
   sentTs       : number
-  receivedTs   : number
 }

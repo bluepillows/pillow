@@ -1,14 +1,14 @@
 import { Component,
          Inject }                                 from '@angular/core'
-import { RunContext }                             from 'src/app/framework'
+import { RunContext }                             from 'src/app/framework/rc-cover'
 import { COMPONENT_TYPE }                         from 'src/app/cover.component'
 
 @Component({
-  selector: 'cover-friends',
-  templateUrl: './friends.component.html',
-  styleUrls: ['./friends.component.scss']
+  selector: 'cover-login',
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.scss']
 })
-export class FriendsComponent {
+export class LoginComponent {
 
   myName: string
 

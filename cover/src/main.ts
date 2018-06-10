@@ -3,7 +3,7 @@ import { platformBrowserDynamic }                 from '@angular/platform-browse
 
 import { AppModule }                              from './app/cover.module'
 import { environment }                            from './environments/environment'
-import { RunContext }                             from './app/framework'
+import { RunContext }                             from './app/framework/rc-cover'
 
 
 function main() {

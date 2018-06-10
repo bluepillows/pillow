@@ -7,8 +7,8 @@ import { MatToolbarModule,
 
 // COMPONENTS
 import { CoverComponent }                         from './cover.component'
-import { FriendsComponent } from './components/friends/friends.component'
-import { ChatComponent } from './components/chat/chat.component'
+import { LoginComponent }                         from './components/login/login.component'
+import { ChatComponent }                          from './components/chat/chat.component'
 
 // SERVICES
 
@@ -19,7 +19,7 @@ import { ChatComponent } from './components/chat/chat.component'
 @NgModule({
   declarations: [
     CoverComponent,
-    FriendsComponent,
+    LoginComponent,
     ChatComponent
   ],
   imports: [

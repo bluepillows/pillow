@@ -1,6 +1,7 @@
 import { Injectable,
          Inject }                                 from '@angular/core'
-import { RunContext }                             from 'src/app/framework'
+import { RunContext }                             from 'src/app/framework/rc-cover'
+import { MessageInfo }                            from 'src/shared'
 
 @Injectable({
   providedIn: 'root'
@@ -11,20 +12,22 @@ export class ChatService {
 
   }
 
-  sendMessage(message) {
+  sendMessage(text) {
+    const ts = Date.now()
 
-    const senderName = this.rc.senderName
+    const message: MessageInfo = {
+      mid          : ts,
+      text         : text,
+      senderId     : null,
+      senderName   : this.rc.senderName,
+      receiverId   : null,
+      receiverName : null,
+      sentTs       : ts
+    }
+
     this.rc.xmn.sendEvent('pillowMessage', {
-      senderName,
-      msg: message
+      message
     })
   }
-  
-  getMessages() {
-
-    console.log(`wasp > getMessages`)
-
-  }
-  
 
 }
