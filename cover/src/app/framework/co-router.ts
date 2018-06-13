@@ -2,7 +2,7 @@ import { CoverComponent }                         from "src/app/cover.component"
 
 export class CoRouter {
 
-  coverComp: CoverComponent
+  private coverComp: CoverComponent
 
   registerCover(comp: CoverComponent) {
     this.coverComp = comp

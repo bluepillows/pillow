@@ -9,3 +9,7 @@ export class MessageInfo {
   sentTs       : number
   room        ?: string
 }
+
+export class ChatroomInfo {
+  roomName: string
+}

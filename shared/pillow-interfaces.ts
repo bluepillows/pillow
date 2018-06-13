@@ -6,7 +6,8 @@
    
 ------------------------------------------------------------------------------*/
 
-import {MessageInfo} from './pillow-types'
+import { MessageInfo,
+         ChatroomInfo }                           from './pillow-types'
 
 export namespace MessageIO {
   export const name = 'messageIO'
@@ -37,6 +38,6 @@ export namespace ListRooms {
   export type params = {
   }
   export type retval = {
-    rooms : string[]
+    rooms : ChatroomInfo[]
   }
 }

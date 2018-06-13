@@ -1,7 +1,8 @@
 import { EventSystem }                            from 'src/app/framework/co-event-system'
 import { CO_UI_EVENT }                            from './co-event-system'
+import { ListRooms,
+         MessageIO }                              from 'src/shared'
 import * as io                                    from 'socket.io-client'
-import { MessageInfo } from 'src/shared/pillow-types';
 
 export enum events {
   pillowMessage = 'pillowMessage'
@@ -25,20 +26,25 @@ export class XmnCover {
     }
   }
 
-  sendEvent(eventName: string, data: any) {
+  sendEvent(eventName: string, data ?: any) {
+
+    data = data || {}
 
     this.socket.emit(eventName, data)
   }
 
   private eventHandler() {
 
-    this.socket.on('pillowMessage', data => {
-      
-      console.log(`wasp > eventHandler > data: ${JSON.stringify(data)}`)
-    
-      const message: MessageInfo = data.message
+    // event handler for sendMessage
+    this.socket.on(MessageIO.name, data => {
 
-      EventSystem.broadcast(CO_UI_EVENT.NEW_MESSAGE, data)
+      EventSystem.broadcast(CO_UI_EVENT.MESSAGE_IO, data)
+    })
+
+    // event handler for listRooms
+    this.socket.on(ListRooms.name, data => {
+
+      EventSystem.broadcast(CO_UI_EVENT.LIST_ROOMS, data)
     })
   }
 

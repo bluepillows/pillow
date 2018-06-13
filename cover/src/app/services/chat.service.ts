@@ -16,12 +16,8 @@ export class ChatService {
     const ts = Date.now()
 
     const message: MessageInfo = {
-      mid          : ts,
       text         : text,
-      senderId     : null,
       senderName   : this.rc.senderName,
-      receiverId   : null,
-      receiverName : null,
       sentTs       : ts
     }
 

@@ -1,6 +1,8 @@
 
 export const CO_UI_EVENT = {
-  NEW_MESSAGE : 'new-message'
+  MESSAGE_IO : 'message-io',
+  LIST_ROOMS : 'list-rooms'
+
 }
 
 export namespace EventSystem {

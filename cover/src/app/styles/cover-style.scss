@@ -6,20 +6,10 @@
 
 //================================== FONT IMPORTS ==============================
 
-// @font-face {
-//   font-family: $font-body-bold;
-//   src: url('../fonts/opensans/OpenSans-Bold.woff2');
-// }
-
-// @font-face {
-//   font-family: $font-body-normal;
-//   src: url('../fonts/opensans/OpenSans-SemiBold.woff2');
-// }
-
-// @font-face {
-//   font-family: $font-body-light;
-//   src: url('../fonts/opensans/OpenSans-Regular.woff2');
-// }
+@font-face {
+  font-family: $font-body-normal;
+  src: url('../../assets/fonts/OpenSans-SemiBold.woff2');
+}
 
 //================================= GLOBAL STYLING =============================
 
@@ -59,6 +49,7 @@ html, body {
   min-height: 100vh !important;
   
   overflow: hidden !important;
+  font-family: $font-body-normal;
   font-size: $reference-font-size;
 }
 

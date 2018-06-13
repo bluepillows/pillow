@@ -16,8 +16,10 @@ export class ChatComponent implements OnInit {
   chatMessages : MessageInfo[] = []
   newMessage   : string
 
-  constructor(@Inject('RunContext') private rc : RunContext,
-              private chatService              : ChatService) {
+  userColorMap = {}
+
+  constructor(@Inject('RunContext') public rc : RunContext,
+              private chatService             : ChatService) {
 
   }
 
@@ -39,12 +41,30 @@ export class ChatComponent implements OnInit {
 
   messageReceived(event: any) {
 
-    console.log(`wasp > messageReceived > event: ${JSON.stringify(event.detail)}`)
-
     const message: MessageInfo = event.detail.message
     this.chatMessages.push(message)
+  }
 
-    console.log(`wasp > messageReceived > chatMessages: ${JSON.stringify(this.chatMessages)}`)
+  signOut() {
+
+    this.rc.coRouter.getCover().signOut()
+  }
+
+  // to assign a consistent random background color to each user
+  getRandomColor(userName: string) {
+
+    if (!this.userColorMap[userName]) {
+      const min   = 0,
+            max   = 255,
+            red   = Math.floor(Math.random() * (max - min + 1)) + min,
+            green = Math.floor(Math.random() * (max - min + 1)) + min,
+            blue  = Math.floor(Math.random() * (max - min + 1)) + min,
+            color = `rgb(${red}, ${green}, ${blue})`
+
+      this.userColorMap[userName] = color
+    }
+
+    return this.userColorMap[userName]
   }
 
 }

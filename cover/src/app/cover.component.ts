@@ -38,4 +38,10 @@ export class CoverComponent implements OnInit {
     this.rc.coRouter.registerCover(this)
   }
 
+  signOut() {
+    
+    // clear localStorage
+    this.componentType = COMPONENT_TYPE.LOGIN
+  }
+
 }
