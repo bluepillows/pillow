@@ -21,7 +21,7 @@ export class ChatService {
       sentTs       : ts
     }
 
-    this.rc.xmn.sendEvent('pillowMessage', {
+    this.rc.xmn.sendEvent('messageIO', {
       message
     })
   }

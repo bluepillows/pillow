@@ -5,7 +5,7 @@ import { ListRooms,
 import * as io                                    from 'socket.io-client'
 
 export enum events {
-  pillowMessage = 'pillowMessage'
+  messageIO = 'messageIO'
 }
 
 export class XmnCover {

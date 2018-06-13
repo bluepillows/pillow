@@ -19,6 +19,7 @@ import {
           ListRooms,
           JoinRoom
        }                                          from '../shared'
+import {PillowBot}                                from '../pillow-bot'
 
 export class MessageEvents {
 
@@ -38,13 +39,26 @@ export class MessageEvents {
     }
 
     io.to(room).emit(MessageIO.name, retval)
+
+    const botResp = await new PillowBot().interact(rc, param.message.text) as any
+    const botText = {
+      message : botResp.fulfillmentText,
+      name    : 'Gideon',
+      sentTs  : Date.now()
+    }
+
+    io.to(room).emit(MessageIO.name, botText)
   }
 
   @PillowEvent(ListRooms.name)
   async listRooms(rc : RunContext, io : Server, socket : Socket, param : ListRooms.params) {
     const retval = {} as ListRooms.retval
+    
+    retval.rooms = []
 
-    retval.rooms = Object.keys(io.sockets.adapter.rooms)
+    for(let roomName in io.sockets.adapter.rooms) {
+      retval.rooms.push({roomName})
+    }
 
     socket.emit(ListRooms.name, retval)
   }
