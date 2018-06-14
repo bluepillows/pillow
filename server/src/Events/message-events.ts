@@ -73,7 +73,7 @@ export class MessageEvents {
   async joinRoom(rc : RunContext, io : Server, socket : Socket, param : JoinRoom.params) {
     const retval = {} as JoinRoom.retval
 
-    if(param.room) socket.join(param.room)
+    if(param.room) socket.join(param.room.roomName)
 
     socket.emit(JoinRoom.name, retval)
 
