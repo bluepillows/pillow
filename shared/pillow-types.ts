@@ -10,9 +10,20 @@ export class MessageInfo {
   room        ?: string
 }
 
+export class PrivateMessageInfo {
+  text         : string
+  senderName   : string
+  senderId     : string
+  targetUserId : string
+  sentTs       : number
+}
+
 export class ChatroomInfo {
   roomName         : string
   desc             : string
   activeUsersCount : number
+}
 
+export const PillowConstants = {
+  DefaultChatroom : 'commom_room'
 }
