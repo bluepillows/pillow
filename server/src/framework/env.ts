@@ -7,7 +7,11 @@
 ------------------------------------------------------------------------------*/
 
 export type ENV = {
-  MONGO_URL : string
+
+  MONGO_URL   : string
 
   SERVER_PORT : number
+
+  SERVER_NAME : string
+  
 }

@@ -17,7 +17,6 @@ export class RunContext {
 
   constructor() {
     this.ENV = require(path.resolve('./config/env.json'))
-
   }
   
 }

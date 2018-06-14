@@ -19,6 +19,8 @@ export class PillowServer {
   async main() {
     this.rc = new RunContext()
 
+    process.title  = this.rc.ENV.SERVER_NAME
+
     await PillowIo.commitRegister(this.rc, Events.getApiProviders())
 
     PillowIo.init(this.rc)
