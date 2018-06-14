@@ -20,10 +20,6 @@ check_status() {
   running=`ps ax | grep -v grep | grep $SERVERPROCNAME | wc -l`
   
   if [ $running -gt 0 ]; then
-    until curl -IL --silent http://localhost:9001 | grep Date; do
-      printf '.'
-      sleep 1
-    done
     echo "$SERVERPROCNAME is running"
   else
     echo "$SERVERPROCNAME is NOT running"
