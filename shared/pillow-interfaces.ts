@@ -16,9 +16,7 @@ export namespace MessageIO {
     message : MessageInfo
   }
   export type retval = {
-    name    : string
-    message : string
-    sentTs  : number
+    message : MessageInfo
   }
 }
 

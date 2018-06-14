@@ -25,26 +25,23 @@ export class MessageEvents {
 
   @PillowEvent(MessageIO.name)
   async messageIO(rc : RunContext, io : Server, socket : Socket, param : MessageIO.params) {
-    const retval = {} as MessageIO.retval,
-          room   = param.message.room || 'commom_room'
-
-    
-    retval.message = param.message.text
-    retval.name    = param.message.senderName
-    retval.sentTs  = param.message.sentTs
+    const room   = param.message.room || 'commom_room'
 
     if(!socket.rooms[room]) {
       console.log(`Room not yet joined. Joining room : ${room}`)
       socket.join(room)
     }
 
-    io.to(room).emit(MessageIO.name, retval)
+    io.to(room).emit(MessageIO.name, param)
 
-    const botResp = await new PillowBot().interact(rc, param.message.text) as any
-    const botText = {
-      message : botResp.fulfillmentText,
-      name    : 'Gideon',
-      sentTs  : Date.now()
+    const botResp = await new PillowBot('random-Id').interact(rc, param.message.text) as any
+    const botText = {} as MessageIO.retval
+
+    botText.message = {
+      text         : botResp.fulfillmentText,
+      senderName   : 'Gideon',
+      sentTs       : Date.now(),
+      room         : room
     }
 
     io.to(room).emit(MessageIO.name, botText)

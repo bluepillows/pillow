@@ -17,9 +17,9 @@ export class PillowBot {
   private projectId : string
   private sessionId : string
 
-  constructor() {
+  constructor(sessionId : string) {
     this.projectId = 'pillow-2220f'
-    this.sessionId = 'quickstart-session-id'
+    this.sessionId = sessionId
   }
 
   async interact(rc : RunContext, message : string) {
