@@ -3,10 +3,11 @@ import { Component,
          Inject, 
          ViewChildren, 
          QueryList,
-         AfterViewInit}                               from '@angular/core'
+         AfterViewInit}                           from '@angular/core'
 import { RunContext }                             from 'src/app/framework/rc-cover'
 import { ChatService }                            from 'src/app/services/chat.service'
-import { MessageInfo }                            from 'src/shared'
+import { MessageInfo,
+         ChatroomInfo }                            from 'src/shared'
 
 @Component({
   selector    : 'cover-chat',
@@ -17,13 +18,15 @@ export class ChatComponent implements OnInit, AfterViewInit {
 
   @ViewChildren('messagesList') private messagesListHTML: QueryList<any>
 
-  private messagesList: any[]
+  private messagesList : any[]
 
-  header       : string
-  chatMessages : MessageInfo[] = []
-  newMessage   : string
+  header               : string
+  chatMessages         : MessageInfo[] = []
+  newMessage           : string
 
-  userColorMap = {}
+  userColorMap         = {}
+
+  private chatroom     : ChatroomInfo = null
 
   constructor(@Inject('RunContext') public rc : RunContext,
               private chatService             : ChatService) {
@@ -32,7 +35,15 @@ export class ChatComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
 
+    this.getChatroomInfo()
     this.initUi()
+  }
+
+  private getChatroomInfo() {
+
+    this.chatroom = this.rc.coRouter.getCover().getCurrentChatRoom()
+
+    if (!this.chatroom) throw Error('Chat component: chatroom is empty!')
   }
 
   ngAfterViewInit() {
@@ -51,14 +62,14 @@ export class ChatComponent implements OnInit, AfterViewInit {
     msgElem.scrollIntoView(true)
   }
 
-  initUi() {
-    this.header = 'Chatroom'
+  private initUi() {
+    this.header = this.chatroom.roomName
   }
 
   sendMessage() {
 
     const text = this.newMessage
-    this.chatService.sendMessage(text)
+    this.chatService.sendMessage(text, this.chatroom)
     this.newMessage = null
   }
 

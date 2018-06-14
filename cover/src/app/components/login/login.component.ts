@@ -23,7 +23,7 @@ export class LoginComponent {
 
     this.rc.userKeyValue.name = this.myName
 
-    this.rc.coRouter.getCover().componentType = COMPONENT_TYPE.CHAT
+    this.rc.coRouter.getCover().componentType = COMPONENT_TYPE.CHATROOM_LIST
   }
 
 }

@@ -6,7 +6,8 @@ import { FormsModule }                            from '@angular/forms'
 import { MatToolbarModule,
          MatButtonModule, 
          MatIconModule, 
-         MatMenuModule }                          from '@angular/material'
+         MatMenuModule,
+         MatInputModule }                          from '@angular/material'
 
 
 // COMPONENTS
@@ -56,7 +57,8 @@ import { ChatroomComponent } from './components/chatroom/chatroom.component'
     MatToolbarModule,
     MatButtonModule,
     MatIconModule,
-    MatMenuModule
+    MatMenuModule,
+    MatInputModule
   ],
   providers: [],
   bootstrap: [CoverComponent]

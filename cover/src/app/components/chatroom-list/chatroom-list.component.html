@@ -20,7 +20,9 @@
 
   <div class="rooms-container">
 
-    <div class="room-item" *ngFor="let room of chatrooms">
+    <div class="room-item"
+      *ngFor="let room of chatrooms"
+      (click)="openChat(room)">
 
       <div class="room-icon"
         [style.background-color]="getRandomColor(room.roomName)">
@@ -39,6 +41,6 @@
 <button mat-fab
   color="accent"
   class="create-room-button"
-  (click)="openChatroom()">
+  (click)="openChatroomCreate()">
   <mat-icon>add</mat-icon>
 </button>

@@ -1,3 +1,55 @@
-<p>
-  chatroom works!
-</p>
+<div class="cover-root chatroom-comp">
+
+  <mat-toolbar class="cover-header">
+
+    <mat-toolbar-row class="cover-header-row">
+      {{ header }}  
+    </mat-toolbar-row>
+  </mat-toolbar>
+
+  <form #createRoomForm="ngForm">
+    <ul class="create-room-container">
+
+      <li>
+        <input matInput
+          coAutoFocus
+          name="name"
+          [(ngModel)]="name"
+          #nameInput="ngModel"
+          placeholder="ChatRoom Name"
+          required>
+        
+        <mat-error *ngIf="nameInput.invalid && (nameInput.dirty || nameInput.touched) && nameInput?.errors['required']"
+          class="error-text">
+          Name is required!
+        </mat-error>
+      </li>
+        
+      <li>
+        <textarea matInput
+          name="desc"
+          [(ngModel)]="desc"
+          #descInput="ngModel"
+          placeholder="What is this room for?"
+          required>
+        </textarea>
+        
+        <mat-error *ngIf="descInput.invalid && (descInput.dirty || descInput.touched) && descInput?.errors['required']"
+          class="error-text">
+          Description is required!
+        </mat-error>
+      </li>
+
+      <li>
+        <button mat-raised-button
+          color="accent"
+          [disabled]="!createRoomForm.form.valid"
+          (click)="createRoom()"
+          type="submit">
+          Create Room
+        </button>
+      </li>
+    </ul>
+  </form>
+
+</div>

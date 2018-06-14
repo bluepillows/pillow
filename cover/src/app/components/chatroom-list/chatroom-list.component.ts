@@ -5,7 +5,7 @@ import { RunContext }                             from 'src/app/framework/rc-cov
 import { ListRooms,
          ChatroomInfo }                           from 'src/shared'
 import { RoomService }                            from '../../services/room.service'
-import { COMPONENT_TYPE } from 'src/app/cover.component';
+import { COMPONENT_TYPE }                         from 'src/app/cover.component'
 
 @Component({
   selector    : 'cover-chatroom-list',
@@ -30,16 +30,20 @@ export class ChatroomListComponent implements OnInit {
 
   listRooms(event: any) {
 
-    console.log(`wasp > listRooms > event: ${JSON.stringify(event.detail)}`)
     const rooms: ChatroomInfo[] = event.detail.rooms
     this.chatrooms.push(...rooms)
   }
 
-  openChatroom() {
-    
-    this.rc.coRouter.getCover().componentType = COMPONENT_TYPE.CHATROOM
+  openChat(roomInfo: ChatroomInfo) {
+
+    this.rc.coRouter.getCover().setCurrentChatRoom(roomInfo)
+    this.rc.coRouter.getCover().componentType = COMPONENT_TYPE.CHAT
   }
 
+  openChatroomCreate() {
+
+    this.rc.coRouter.getCover().componentType = COMPONENT_TYPE.CHATROOM
+  }
 
   signOut() {
 

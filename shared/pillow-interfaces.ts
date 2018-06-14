@@ -24,9 +24,10 @@ export namespace JoinRoom {
   export const name = 'joinRoom'
 
   export type params = {
-    room : string
+    room : ChatroomInfo
   }
   export type retval = {
+    room: ChatroomInfo
   }
 }
 
