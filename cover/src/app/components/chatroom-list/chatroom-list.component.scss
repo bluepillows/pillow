@@ -1,14 +1,4 @@
-.chatroom-header {
-  position: fixed;
-}
-
-.chatroom-options {
-  position: absolute;
-  right: 0;
-  margin-right: 4vw;
-}
-
-.messages-container {
+.rooms-container {
   margin-top: 10vh;
   margin-bottom: 10vh;
 }
@@ -20,7 +10,7 @@
   flex-direction: row;
   align-items: flex-start;
 
-  .room-name {
+  .room-icon {
     width: 24px;
     height: 24px;
     display: flex;
@@ -31,4 +21,15 @@
     color: white;
     border-radius: 100%;
   }
+
+  .room-desc {
+
+  }
+}
+
+.create-room-button {
+  position: fixed;
+  z-index: 100;
+  bottom: 8vw;
+  right: 8vw;
 }

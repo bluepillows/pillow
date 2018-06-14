@@ -1,14 +1,14 @@
 <div class="cover-root chatroom-list-comp co-event-list-rooms"
   (co-event-list-rooms)="listRooms($event)">
 
-  <mat-toolbar class="chat-header">
+  <mat-toolbar class="cover-header">
 
-    <mat-toolbar-row class="chat-header-row">
+    <mat-toolbar-row class="cover-header-row">
       
       {{ header }}  
       
       <mat-icon [matMenuTriggerFor]="menu"
-        class="chat-options">
+        class="cover-header-options">
         more_vert
       </mat-icon>
     
@@ -18,18 +18,17 @@
     </mat-toolbar-row>
   </mat-toolbar>
 
-  <div class="messages-container">
+  <div class="rooms-container">
 
-    <div class="msg-item" *ngFor="let msg of chatMessages"
-      [class.self-msg]="rc.senderName === msg.senderName">
-      
-      <div class="msg-sender"
-        [style.background-color]="getRandomColor(msg.senderName)">
-        {{ msg?.senderName | extractInitial }}
+    <div class="room-item" *ngFor="let room of chatrooms">
+
+      <div class="room-icon"
+        [style.background-color]="getRandomColor(room.roomName)">
+        {{ room?.roomName | extractInitial }}
       </div>
 
-      <div class="msg-text">
-        {{ msg?.text }}
+      <div class="room-desc">
+        {{ room?.desc }}
       </div>
     </div>
 
@@ -37,18 +36,9 @@
 
 </div>
 
-<div class="new-msg-input">
-  <input type="text"
-    coAutoFocus
-    placeholder="Type here..."
-    name="newMessage"
-    [(ngModel)]="newMessage"
-    (keyup.enter)="sendMessage()">
-
-  <button mat-mini-fab 
-    type="button"
-    color="primary"
-    (click)="sendMessage()">
-    <mat-icon>send</mat-icon>
-  </button>
-</div>
+<button mat-fab
+  color="accent"
+  class="create-room-button"
+  (click)="openChatroom()">
+  <mat-icon>add</mat-icon>
+</button>

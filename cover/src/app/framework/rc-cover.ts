@@ -24,10 +24,10 @@ export class RunContext {
 
   private initConnection() {
 
-    const loc = window.location
+    // const loc = window.location
+    // this.remoteUrl = `${loc.protocol}//${loc.host}`
 
-    this.remoteUrl = `${loc.protocol}//${loc.host}`
-    this.remoteUrl = `http://192.168.10.151:9001`
+    this.remoteUrl = `http://localhost:9001`
 
     if (!this.xmn) {
       this.xmn = new XmnCover(this.remoteUrl)

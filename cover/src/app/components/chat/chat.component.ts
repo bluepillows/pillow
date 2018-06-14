@@ -1,6 +1,9 @@
 import { Component,
          OnInit,
-         Inject }                                 from '@angular/core'
+         Inject, 
+         ViewChildren, 
+         QueryList,
+         AfterViewInit}                               from '@angular/core'
 import { RunContext }                             from 'src/app/framework/rc-cover'
 import { ChatService }                            from 'src/app/services/chat.service'
 import { MessageInfo }                            from 'src/shared'
@@ -10,7 +13,11 @@ import { MessageInfo }                            from 'src/shared'
   templateUrl : './chat.component.html',
   styleUrls   : ['./chat.component.scss']
 })
-export class ChatComponent implements OnInit {
+export class ChatComponent implements OnInit, AfterViewInit {
+
+  @ViewChildren('messagesList') private messagesListHTML: QueryList<any>
+
+  private messagesList: any[]
 
   header       : string
   chatMessages : MessageInfo[] = []
@@ -26,6 +33,22 @@ export class ChatComponent implements OnInit {
   ngOnInit() {
 
     this.initUi()
+  }
+
+  ngAfterViewInit() {
+
+    this.messagesListHTML.changes.subscribe(this.scroll.bind(this))
+  }
+
+  private scroll() {
+
+    this.messagesList = this.messagesListHTML.toArray()
+    
+    if (!this.messagesList || !this.messagesList.length) return
+
+    const msgElem = this.messagesList[this.messagesList.length -1].nativeElement
+
+    msgElem.scrollIntoView(true)
   }
 
   initUi() {

@@ -6,9 +6,7 @@ export const USER_KEYS = {
 
 export class UserKeyValue {
 
-  constructor(private storage: StorageProvider) {
-
-  }
+  constructor(private storage: StorageProvider) { }
 
   set name(value: string) {
     this.storage.setValue(USER_KEYS.NAME, value)

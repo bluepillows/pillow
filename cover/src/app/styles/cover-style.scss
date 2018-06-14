@@ -61,3 +61,13 @@ html, body {
   overflow-x: hidden !important;
   margin: 0 auto;
 }
+
+.cover-header {
+  position: fixed;
+}
+
+.cover-header-options {
+  position: absolute;
+  right: 0;
+  margin-right: 4vw;
+}

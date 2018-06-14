@@ -11,5 +11,8 @@ export class MessageInfo {
 }
 
 export class ChatroomInfo {
-  roomName: string
+  roomName         : string
+  desc             : string
+  activeUsersCount : number
+
 }

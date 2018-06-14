@@ -6,8 +6,10 @@ import { RunContext }                             from 'src/app/framework/rc-cov
 import { MessageInfo }                            from 'src/shared/pillow-types'
 
 export enum COMPONENT_TYPE {
-  LOGIN = 'login',
-  CHAT  = 'chat'
+  LOGIN         = 'login',
+  CHATROOM_LIST = 'chatroomList',
+  CHATROOM      = 'chatroom',
+  CHAT          = 'chat'
 }
 
 @Component({
@@ -40,11 +42,9 @@ export class CoverComponent implements OnInit {
 
   private handleUser() {
 
-    if (!this.rc.userKeyValue.name) {
-      this.componentType = COMPONENT_TYPE.LOGIN
-    } else {
-      this.componentType = COMPONENT_TYPE.CHAT
-    }
+    this.componentType = this.rc.userKeyValue.name    ? 
+                         COMPONENT_TYPE.CHATROOM_LIST : 
+                         COMPONENT_TYPE.LOGIN
   }
 
   signOut() {
