@@ -21,8 +21,8 @@
   <div class="messages-container">
 
     <div class="msg-item" *ngFor="let msg of chatMessages"
-      [class.self-msg]="rc.senderName === msg.senderName">
-      
+      [class.self-msg]="rc.userKeyValue.name === msg.senderName">
+
       <div class="msg-sender"
         [style.background-color]="getRandomColor(msg.senderName)">
         {{ msg?.senderName | extractInitial }}

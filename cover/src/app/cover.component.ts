@@ -28,20 +28,29 @@ export class CoverComponent implements OnInit {
   messages       : MessageInfo[]         = []
 
 
-  constructor(@Inject('RunContext') private rc: RunContext) {
-    
-  }
+  constructor(@Inject('RunContext') private rc: RunContext) { }
 
 
   ngOnInit() {
 
     this.rc.coRouter.registerCover(this)
+
+    this.handleUser()
+  }
+
+  private handleUser() {
+
+    if (!this.rc.userKeyValue.name) {
+      this.componentType = COMPONENT_TYPE.LOGIN
+    } else {
+      this.componentType = COMPONENT_TYPE.CHAT
+    }
   }
 
   signOut() {
     
-    // clear localStorage
-    this.componentType = COMPONENT_TYPE.LOGIN
+    this.rc.userKeyValue.name = null
+    this.componentType        = COMPONENT_TYPE.LOGIN
   }
 
 }
