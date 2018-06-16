@@ -7,23 +7,25 @@
 ------------------------------------------------------------------------------*/
 
 import { 
-          RunContext, 
-          PillowEvent
+        RunContext, 
+        PillowEvent
        }                                          from '../framework'
 import {
-          Server,
-          Socket
+        Server,
+        Socket
        }                                          from 'socket.io'
 import {
-          MessageIO,
-          ListRooms,
-          JoinRoom,
-          PrivateMessage,
-          PillowConstants
+        MessageIO,
+        ListRooms,
+        JoinRoom,
+        PrivateMessage,
+        PillowConstants
        }                                          from '../shared'
-import {  PillowBot  }                            from '../pillow-bot'
+import {PillowBot}                                from '../pillow-bot'
 
 export class MessageEvents {
+
+  private static chatRooms : string[] = [PillowBot.BotName]
 
   @PillowEvent(MessageIO.name)
   async messageIO(rc : RunContext, io : Server, socket : Socket, param : MessageIO.params) {
@@ -32,17 +34,19 @@ export class MessageEvents {
     if(!socket.rooms[room]) socket.join(room)
     io.to(room).emit(MessageIO.name, param)
 
-    // const botResp = await new PillowBot('random-Id').interact(rc, param.message.text) as any
-    // const botText = {} as MessageIO.retval
+    if(room === PillowBot.BotName) {
+      const botResp = await new PillowBot('random-Id').interact(param.message.text) as any,
+            botText = {} as MessageIO.retval
 
-    // botText.message = {
-    //   text         : botResp.fulfillmentText,
-    //   senderName   : 'Gideon',
-    //   sentTs       : Date.now(),
-    //   room         : room
-    // }
+      botText.message = {
+        text         : botResp.fulfillmentText,
+        senderName   : PillowBot.BotName,
+        sentTs       : Date.now(),
+        room         : room
+      }
 
-    // io.to(room).emit(MessageIO.name, botText)
+      io.to(room).emit(MessageIO.name, botText)
+    }
   }
 
   @PillowEvent(PrivateMessage.name)
@@ -55,12 +59,12 @@ export class MessageEvents {
     const retval = {} as ListRooms.retval
     
     retval.rooms = []
-
-    for(let roomName in io.sockets.adapter.rooms) {
+    
+    for(const chatRoom of MessageEvents.chatRooms) {
       const roomInfo = {
-        roomName         : roomName,
+        roomName         : chatRoom,
         desc             : '',
-        activeUsersCount : io.sockets.adapter.rooms[roomName].length
+        activeUsersCount : io.sockets.adapter.rooms[chatRoom] ? io.sockets.adapter.rooms[chatRoom].length : 0
       }
 
       retval.rooms.push(roomInfo)
@@ -73,6 +77,7 @@ export class MessageEvents {
   async joinRoom(rc : RunContext, io : Server, socket : Socket, param : JoinRoom.params) {
     const retval = {} as JoinRoom.retval
 
+    MessageEvents.chatRooms.push(param.room.roomName)
     if(param.room) socket.join(param.room.roomName)
 
     socket.emit(JoinRoom.name, retval)

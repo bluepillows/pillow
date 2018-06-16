@@ -7,52 +7,27 @@
    Copyright (c) 2018 Mubble Networks Private Limited. All rights reserved.
 ------------------------------------------------------------------------------*/
 
-import { RunContext } from "framework"
 const dialogflow = require('dialogflow')
-
-const LANGUAGE_CODE = 'en-US'
 
 export class PillowBot {
 
-  private projectId : string
-  private sessionId : string
+  static BotName : string = 'PillowBot'
 
-  constructor(sessionId : string) {
-    this.projectId = 'pillow-2220f'
-    this.sessionId = sessionId
-  }
+  constructor(private sessionId : string, private projectId : string = 'pillow-2220f') {}
 
-  async interact(rc : RunContext, message : string) {
+  async interact(message : string) {
     const sessionClient = new dialogflow.SessionsClient(),
           sessionPath   = sessionClient.sessionPath(this.projectId, this.sessionId),
           request       = {
-                            session: sessionPath,
-                            queryInput: {
-                              text: {
-                                text: message,
-                                languageCode: LANGUAGE_CODE
-                              }
-                            }
+                            session    : sessionPath,
+                            queryInput : {text : {text : message, languageCode: 'en-US'}}
                           }
 
     return new Promise((resolve, reject) => {
       sessionClient
       .detectIntent(request)
-      .then((responses : any) => {
-        const result = responses[0].queryResult
-
-        console.log(`Query: ${result.queryText}`)
-        console.log(`Response: ${result.fulfillmentText}`)
-
-        if(result.intent) console.log(`Intent: ${result.intent.displayName}`)
-        else console.log(`No intent matched.`)
-
-        resolve(result)
-      })
-      .catch((err : any) => {
-        console.error('ERROR:', err)
-        reject(err)
-      })
+      .then((responses : any) => {resolve(responses[0].queryResult)})
+      .catch((err : any) => {reject(err)})
     })
   }
 }

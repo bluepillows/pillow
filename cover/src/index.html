@@ -10,6 +10,20 @@
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <body>
-  <cover-root></cover-root>
+  <cover-root>
+    <script src="https://www.gstatic.com/firebasejs/5.0.4/firebase.js"></script>
+    <script>
+      // Initialize Firebase
+      var config = {
+        apiKey: "AIzaSyBdXKmxWfcrxVl7y0noJwqwl6OVmEwia6k",
+        authDomain: "pillow-2220f.firebaseapp.com",
+        databaseURL: "https://pillow-2220f.firebaseio.com",
+        projectId: "pillow-2220f",
+        storageBucket: "pillow-2220f.appspot.com",
+        messagingSenderId: "252304251609"
+      };
+      firebase.initializeApp(config);
+    </script>
+  </cover-root>
 </body>
 </html>
