@@ -30,17 +30,11 @@ export class MongoBase {
     }
   }
 
-  //TODO : columns to be predefined set : check for it
-  //TODO : Spectify cloumns (will it make db interaction faster)
   async get(rc : RunContext, id : number) {
-    //TODO : handle Object ID
-    // id = _._pkObjId && typeof(id) === 'string' ? new ObjectID(id) : id
-    
     return await this.findOne(rc, {_id: id})
   }
 
   async findOne(rc : RunContext, selCrit : {[index : string] : any}) {
-
     try {
       const collection = this.getCollection(rc),
             record     = await collection.findOne(selCrit)
@@ -50,20 +44,14 @@ export class MongoBase {
       this.deserialize(record)
       return true
     } catch(error) {
-      //TODO : better handling ?
-      console.log(`findOne Error : ${error}`)
+      console.error(`findOne Error : ${error}`)
       throw(error)
     }
   }
 
-  async insert(rc : RunContext, insertTime : number) {
+  async insert(rc : RunContext, insertTime : number = Date.now()) {
     try {
       const collection = this.getCollection(rc)
-
-      //TODO :
-      // if (!_._pkObjId && !_._pkSeq) {
-      //   if (mu.assert) mu.assert(_._id)
-      // }
 
       if(!this._id) this._id = await this.getNextSequence(rc)
 
@@ -88,7 +76,6 @@ export class MongoBase {
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */   
   
   getCollection(rc : RunContext) {
-    //TODO : Test This
     return rc.mongo.collection((this.constructor as any)._collectionName)
   }
 
@@ -97,12 +84,10 @@ export class MongoBase {
     
     if(object['_id']) this.setKey(object['_id'])
 
-    //TODO : Need better deserialization (Test this first)
     lo.assign(this, object) 
   }
 
   setKey(key : any) {
-    // this._id = _._pkObjId && typeof(key) === 'string' ? new ObjectID(key) : key
     this._id = key
   }
 

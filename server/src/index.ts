@@ -10,7 +10,7 @@ import {
          RunContext,
          PillowIo
        }                                          from './framework'
-import * as Events                                from './Events'
+import * as Events                                from './events'
 
 export class PillowServer {
 

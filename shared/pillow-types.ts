@@ -27,3 +27,13 @@ export class ChatroomInfo {
 export const PillowConstants = {
   DefaultChatroom : 'commom_room'
 }
+
+export enum UserRoles {
+  USER  = 'USER',
+  ADMIN = 'ADMIN'
+}
+
+export enum Gender {
+  MALE   = 'MALE',
+  FEMALE = 'FEMALE'
+}
