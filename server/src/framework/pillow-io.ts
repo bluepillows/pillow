@@ -6,36 +6,52 @@
    
 ------------------------------------------------------------------------------*/
 
+import { RunContext }                             from './runcontext'
+import { RUN_MODE }                               from './server-types'
+import * as http                                  from 'http'
+import * as https                                 from 'https'
 import * as express                               from 'express'
 import * as socketio                              from 'socket.io'
-import { RunContext }                             from './runcontext'
-import { 
-         createServer,
-         Server
-       }                                          from 'http'
+import * as fs                                    from 'fs'
+
 
 export class PillowIo {
 
   private static rc       : RunContext
+  private static io       : socketio.Server
+  private static port     : number
+  private static server   : http.Server | https.Server
+  private static app      : express.Express
   private static eventMap : {[index : string] : InvokeStruct} = {}
-  
-  static io       : socketio.Server
-  static server   : Server
-  static app      : express.Express
 
   static init(rc : RunContext) {
-    const port = rc.ENV.SERVER_PORT
 
-    this.app    = express()
     this.rc     = rc
-    this.server = createServer(this.app)
-    this.io     = socketio(this.server)
+    this.app    = express()
+    
+    if(rc.ENV.RUN_MODE === RUN_MODE.PROD) {
+
+      const key     = fs.readFileSync('./config/pillow-key.pem'),
+            cert    = fs.readFileSync('./config/pillow-key.crt'),
+            options = {key, cert}
+
+      this.server = https.createServer(options, this.app)
+      this.port   = 443
+
+    } else {
+
+      this.server = http.createServer(this.app)
+      this.port   = 9001
+    }
+
+    
+    this.io = socketio(this.server)
 
     this.io.on('connection', this.handleClient)
 
-    this.server.listen(port)
+    this.server.listen(this.port)
 
-    console.log(`Server running at port ${port}`)
+    console.log(`Server running at port ${this.port}`)
   }
 
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

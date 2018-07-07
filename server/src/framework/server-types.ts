@@ -1,19 +1,13 @@
 /*------------------------------------------------------------------------------
    About      : <Write about the file here>
    
-   Created on : Sat Jun 09 2018
+   Created on : Sat Jul 07 2018
    Author     : Akash Dathan
    
+   Copyright (c) 2018 Mubble Networks Private Limited. All rights reserved.
 ------------------------------------------------------------------------------*/
 
-import { RUN_MODE }                               from './server-types'
-
-export type ENV = {
-
-  MONGO_URL   : string
-
-  SERVER_NAME : string
-
-  RUN_MODE    : RUN_MODE
-  
+export enum RUN_MODE  {
+  PROD = 'PROD',
+  DEV  = 'DEV'
 }
