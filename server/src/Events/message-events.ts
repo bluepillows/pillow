@@ -16,16 +16,20 @@ import {
        }                                          from 'socket.io'
 import {
         MessageIO,
+        CheckName,
         ListRooms,
         JoinRoom,
         PrivateMessage,
         PillowConstants
        }                                          from '../shared'
 import {PillowBot}                                from '../pillow-bot'
+import * as lo                                    from 'lodash'
 
 export class MessageEvents {
 
   private static chatRooms : string[] = [PillowBot.BotName]
+
+  private static users : {id : string, name : string}[] = []
 
   @PillowEvent(MessageIO.name)
   async messageIO(rc : RunContext, io : Server, socket : Socket, param : MessageIO.params) {
@@ -39,14 +43,23 @@ export class MessageEvents {
             botText = {} as MessageIO.retval
 
       botText.message = {
-        text         : botResp.fulfillmentText,
-        senderName   : PillowBot.BotName,
-        sentTs       : Date.now(),
-        room         : room
+        text       : botResp.fulfillmentText,
+        senderName : PillowBot.BotName,
+        sentTs     : Date.now(),
+        room       : room
       }
 
       io.to(room).emit(MessageIO.name, botText)
     }
+  }
+
+  @PillowEvent(CheckName.name)
+  async checkName(rc : RunContext, io : Server, socket : Socket, param : CheckName.params) {
+    const retVal = {} as CheckName.retval
+
+    retVal.inUse = lo.some(MessageEvents.users, obj => obj.name === param.name)
+
+    io.to(socket.id).emit(CheckName.name, retVal)
   }
 
   @PillowEvent(PrivateMessage.name)

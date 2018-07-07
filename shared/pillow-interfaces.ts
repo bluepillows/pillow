@@ -24,6 +24,18 @@ export namespace MessageIO {
   }
 }
 
+export namespace CheckName {
+  export const name = 'checkName'
+
+  export type params = {
+    name : string
+  }
+
+  export type retval = {
+    inUse : boolean
+  }
+}
+
 export namespace PrivateMessage {
   export const name = 'privateMessage'
 
